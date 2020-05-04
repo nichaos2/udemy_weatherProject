@@ -20,10 +20,18 @@ app.get("/", function (req, res) {
       // use JSON Viewer Awesome copy for easyness and to avoid mistakes
       const temp = weatherData.main.temp;
       const desc = weatherData.weather[0].description;
-      console.log("Temp is: " + temp);
+      console.log("Temperature in Athens is: " + temp);
       console.log("It is: " + desc);
 
-      res.send("Temp is: " + temp + "<br> It is: " + desc);
+        // get the weather icon
+        const icon_url_start =  "http://openweathermap.org/img/wn/"; 
+        const icon_url_end =  "@2x.png"; 
+        const icon_url_data =  weatherData.weather[0].icon; 
+        const icon_url = icon_url_start + icon_url_data + icon_url_end;
+
+      res.send( "<h3> Temperature in Athens is: " + temp + "</h3>" +
+                "<br> <h4> The weather is : " + desc + "</h4> "+
+                '<br> <img src="' + icon_url +'" alt="Weather in Athens" height="120">' );
     });
   });
 
